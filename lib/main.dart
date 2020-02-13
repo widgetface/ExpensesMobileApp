@@ -102,8 +102,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
-    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final mediaQuery = MediaQuery.of(context);
+    final isLandscape = mediaQuery.orientation == Orientation.landscape;
     final appBar =  AppBar(
         title: Text('Expenses Application'),
         actions: <Widget>[
@@ -114,13 +114,13 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       );
     final txListWidget = Container(
-      height: (MediaQuery.of(context).size.height -
+      height: (mediaQuery.size.height -
               appBar.preferredSize.height -
-              MediaQuery.of(context).padding.top) *
+              mediaQuery.padding.top) *
           0.7,
       child: TransactionList(_userTransactions, _deleteTransaction),
     );
-   var appBarStatusBarHeight = appBar.preferredSize.height + MediaQuery.of(context).padding.top;
+   var appBarStatusBarHeight = appBar.preferredSize.height + mediaQuery.padding.top;
     
     return Scaffold(
       appBar: appBar,
@@ -146,15 +146,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             if (!isLandscape) 
-              Container( 
-              height: (MediaQuery.of(context).size.height - appBarStatusBarHeight)  * 0.25,
+            Container( 
+              height: (mediaQuery.size.height - appBarStatusBarHeight)  * 0.25,
               child: TransactionChart(_recentTransactions),
             ),
             txListWidget,
             if (isLandscape) 
             _showChart ?
             Container( 
-              height: (MediaQuery.of(context).size.height - appBarStatusBarHeight)  * 0.75,
+              height: (mediaQuery.size.height - appBarStatusBarHeight)  * 0.75,
                child: TransactionChart(_recentTransactions),
             )
             :
@@ -162,7 +162,10 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: isLandscape ? 
+      FloatingActionButtonLocation.endFloat
+      :
+      FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () => _startAddNewTransaction(context),
