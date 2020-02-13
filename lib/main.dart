@@ -102,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _buildIosNavBar(context){
+  Widget _buildIosNavBar(BuildContext context){
     return  CupertinoNavigationBar(
               middle: Text('Expenses Application'),
               trailing: Row(
@@ -117,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
           );
   }
 
-Widget _buildAndriodNavBar(context, startAddNewTransaction){
+Widget _buildAndriodNavBar(BuildContext context, Function startAddNewTransaction){
   return AppBar(
           title: const Text('Expenses Application'),
           actions: <Widget>[
