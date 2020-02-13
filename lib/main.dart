@@ -193,6 +193,14 @@ class _MyHomePageState extends State<MyHomePage> {
         Scaffold(
           appBar: appBar,
           body: view,
+          floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+            floatingActionButton: Platform.isIOS
+                ? Container()
+                : FloatingActionButton(
+                    child: Icon(Icons.add),
+                    onPressed: () => _startAddNewTransaction(context),
+                  ),
         );
   }
 }
