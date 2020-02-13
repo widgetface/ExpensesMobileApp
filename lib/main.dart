@@ -36,8 +36,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  // String titleInput;
-  // String amountInput;
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -117,6 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
+              height: MediaQuery.of(context).size.height * 0.25,
               width: double.infinity,
               child: TransactionChart(_recentTransactions),
             ),
