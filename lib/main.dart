@@ -106,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
-    final appBar =  AppBar(
+    final appBar = AppBar(
         title: Text('Expenses Application'),
         actions: <Widget>[
           IconButton(
@@ -115,6 +115,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       );
+
+
     final txListWidget = Container(
       height: (mediaQuery.size.height -
               appBar.preferredSize.height -
@@ -165,6 +167,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Platform.isIOS ?
         CupertinoPageScaffold(
+          navigationBar: CupertinoNavigationBar(),
           child: view,)
           :
         Scaffold(
