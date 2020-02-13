@@ -102,6 +102,33 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  Widget _buildIosNavBar(context){
+    return  CupertinoNavigationBar(
+              middle: Text('Expenses Application'),
+              trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                GestureDetector(
+                  child: const Icon(CupertinoIcons.add),
+                  onTap: () => _startAddNewTransaction(context)
+                )
+              ],
+            )
+          );
+  }
+
+Widget _buildAndriodNavBar(context, startAddNewTransaction){
+  return AppBar(
+          title: const Text('Expenses Application'),
+          actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () => startAddNewTransaction(context),
+          ),
+        ],
+      );
+}
+
 Widget _buildLanscapeContent(){
   return  Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -138,50 +165,9 @@ return [
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
     
     final PreferredSizeWidget appBar = Platform.isIOS ?
-
-    CupertinoNavigationBar(
-
-            middle: Text('Expenses Application'),
-
-            trailing: Row(
-
-              mainAxisSize: MainAxisSize.min,
-
-              children: <Widget>[
-
-                GestureDetector(
-
-                  child: const Icon(CupertinoIcons.add),
-
-                  onTap: () => _startAddNewTransaction(context)
-
-                  )
-
-              ],)
-
-    )
-
-          :
-
-    AppBar(
-
-        title: const Text('Expenses Application'),
-
-        actions: <Widget>[
-
-          IconButton(
-
-            icon: const Icon(Icons.add),
-
-            onPressed: () => _startAddNewTransaction(context),
-
-          ),
-
-        ],
-
-      );
-
-
+      _buildIosNavBar(context)
+      :
+     _buildAndriodNavBar(context, _startAddNewTransaction);
 
     final txListWidget = Container(
       height: (mediaQuery.size.height -
