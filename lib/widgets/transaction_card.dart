@@ -9,6 +9,7 @@ class TransactionCard extends StatelessWidget {
  final Function deleteItem;
 
   TransactionCard({
+    @required Key key,
     @required this.id,
     @required this.title,
     @required this.amount,
