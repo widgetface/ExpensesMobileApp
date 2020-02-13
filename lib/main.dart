@@ -102,6 +102,33 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+Widget _buildLanscapeContent(){
+  return  Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text('Show Chart'),
+              Switch.adaptive(
+              value: _showChart,
+              onChanged: (val) {
+              setState(() {
+                _showChart = val;
+              });
+            },
+          ),
+        ],
+      );
+}
+
+Widget _buildPortraitConteht(mediaQuery, appBarStatusBarHeight){
+
+return (Container( 
+          height: (mediaQuery.size.height - appBarStatusBarHeight)  * 0.25,
+          child: TransactionChart(_recentTransactions),
+        )
+      );
+}
+
+
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -109,27 +136,49 @@ class _MyHomePageState extends State<MyHomePage> {
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
     
     final PreferredSizeWidget appBar = Platform.isIOS ?
+
     CupertinoNavigationBar(
+
             middle: Text('Expenses Application'),
+
             trailing: Row(
+
               mainAxisSize: MainAxisSize.min,
+
               children: <Widget>[
+
                 GestureDetector(
+
                   child: const Icon(CupertinoIcons.add),
+
                   onTap: () => _startAddNewTransaction(context)
+
                   )
+
               ],)
+
     )
+
           :
+
     AppBar(
+
         title: const Text('Expenses Application'),
+
         actions: <Widget>[
+
           IconButton(
+
             icon: const Icon(Icons.add),
+
             onPressed: () => _startAddNewTransaction(context),
+
           ),
+
         ],
+
       );
+
 
 
     final txListWidget = Container(
@@ -149,27 +198,10 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               if (isLandscape)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Text('Show Chart'),
-                    Switch.adaptive(
-                      value: _showChart,
-                      onChanged: (val) {
-                        setState(() {
-                          print(val);
-                          _showChart = val;
-                        });
-                      },
-                    ),
-                  ],
-                ),
+                 _buildLanscapeContent(),
               if (!isLandscape) 
-              Container( 
-                height: (mediaQuery.size.height - appBarStatusBarHeight)  * 0.25,
-                child: TransactionChart(_recentTransactions),
-              ),
-              txListWidget,
+                 _buildPortraitConteht(mediaQuery, appBarStatusBarHeight),
+                  txListWidget,
               if (isLandscape) 
               _showChart ?
               Container( 
