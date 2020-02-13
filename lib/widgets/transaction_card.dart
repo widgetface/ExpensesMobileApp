@@ -15,7 +15,7 @@ class TransactionCard extends StatelessWidget {
     @required this.amount,
     @required this.date,
     @required this.deleteItem
-  });
+  }) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
