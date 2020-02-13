@@ -75,7 +75,7 @@ class _NewTransactionState extends State<NewTransaction> {
               // },
             ),
             TextField(
-              decoration: InputDecoration(labelText: 'Amount'),
+              decoration: const InputDecoration(labelText: 'Amount'),
               controller: _amountController,
               keyboardType: TextInputType.number,
               onSubmitted: (_) => _submitData(),
@@ -101,7 +101,7 @@ class _NewTransactionState extends State<NewTransaction> {
                       borderRadius: new BorderRadius.circular(6.0),
                       side: BorderSide(color: Theme.of(context).primaryColor)
                     ),
-                child: Text('Add Transaction'),
+                child: const Text('Add Transaction'),
                 textColor: Colors.white,
                 color: Theme.of(context).primaryColor,
                 onPressed: _submitData,
