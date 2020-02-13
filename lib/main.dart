@@ -112,6 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
     CupertinoNavigationBar(
             middle: Text('Expenses Application'),
             trailing: Row(
+              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 GestureDetector(
                   child: Icon(CupertinoIcons.add),
@@ -141,44 +142,48 @@ class _MyHomePageState extends State<MyHomePage> {
 
     var appBarStatusBarHeight = appBar.preferredSize.height + mediaQuery.padding.top;
     
-    var view = SingleChildScrollView(
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            if (isLandscape)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text('Show Chart'),
-                  Switch.adaptive(
-                    value: _showChart,
-                    onChanged: (val) {
-                      setState(() {
-                        print(val);
-                        _showChart = val;
-                      });
-                    },
-                  ),
-                ],
+    var view = SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              if (isLandscape)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('Show Chart'),
+                    Switch.adaptive(
+                      value: _showChart,
+                      onChanged: (val) {
+                        setState(() {
+                          print(val);
+                          _showChart = val;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              if (!isLandscape) 
+              Container( 
+                height: (mediaQuery.size.height - appBarStatusBarHeight)  * 0.25,
+                child: TransactionChart(_recentTransactions),
               ),
-            if (!isLandscape) 
-            Container( 
-              height: (mediaQuery.size.height - appBarStatusBarHeight)  * 0.25,
-              child: TransactionChart(_recentTransactions),
-            ),
-            txListWidget,
-            if (isLandscape) 
-            _showChart ?
-            Container( 
-              height: (mediaQuery.size.height - appBarStatusBarHeight)  * 0.75,
-               child: TransactionChart(_recentTransactions),
-            )
-            :
-            txListWidget
-          ],
+              txListWidget,
+              if (isLandscape) 
+              _showChart ?
+              Container( 
+                height: (mediaQuery.size.height - appBarStatusBarHeight)  * 0.75,
+                 child: TransactionChart(_recentTransactions),
+              )
+              :
+              txListWidget
+            ],
+          ),
         ),
       );
+    
+      
 
     return Platform.isIOS ?
         CupertinoPageScaffold(

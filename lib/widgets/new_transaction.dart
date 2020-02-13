@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 class NewTransaction extends StatefulWidget {
@@ -100,7 +102,13 @@ class _NewTransactionState extends State<NewTransaction> {
                 ],
               ),
             ),
-           
+           Platform.isIOS ?
+           CupertinoButton(
+              child: Text('Add Transaction'),
+              color: Theme.of(context).primaryColor,
+              onPressed: _submitData,
+           )
+           :
             FlatButton(
                   shape: RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(6.0),
