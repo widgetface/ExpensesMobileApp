@@ -38,7 +38,6 @@ class TransactionChart extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    print(recentTransactions);
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(10),
