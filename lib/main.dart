@@ -110,11 +110,14 @@ class _MyHomePageState extends State<MyHomePage> {
     
     final PreferredSizeWidget appBar = Platform.isIOS ?
     CupertinoNavigationBar(
-            leading: Text('Expenses Application'),
-            trailing: IconButton(
-                icon: Icon(Icons.add),
-                onPressed: () => _startAddNewTransaction(context),
-            ),
+            middle: Text('Expenses Application'),
+            trailing: Row(
+              children: <Widget>[
+                GestureDetector(
+                  child: Icon(CupertinoIcons.add),
+                  onTap: () => _startAddNewTransaction(context)
+                  )
+              ],)
     )
           :
     AppBar(
