@@ -42,7 +42,7 @@ class TransactionChart extends StatelessWidget {
       elevation: 6,
       margin: EdgeInsets.all(10),
      child: Container(
-       padding: EdgeInsets.all(8),
+       padding: const EdgeInsets.all(8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: groupedTransactionValues.map((data){
