@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 class TransactionCard extends StatelessWidget {
 
-final String id;
+ final String id;
  final String title;
  final double amount;
  final DateTime date;
@@ -18,6 +18,9 @@ final String id;
   
   @override
   Widget build(BuildContext context) {
+
+    final curScaleFactor = MediaQuery.of(context).textScaleFactor;
+
     return Card(
         child: Row(children: <Widget>[
           Container(
@@ -33,7 +36,7 @@ final String id;
                 child: Padding(
                 padding: EdgeInsets.all(10),
                 child: FittedBox(
-                child: Text('£ ${amount.toStringAsFixed(2)}',style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
+                child: Text('£ ${amount.toStringAsFixed(2)}',style: TextStyle(fontSize: 18 * curScaleFactor, fontWeight: FontWeight.bold))),
               ),
             ),
           ),
@@ -49,7 +52,7 @@ final String id;
               width: 200,
               child:Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
               ),
-              Text(DateFormat.yMEd().format(date), style: TextStyle(fontSize: 12, color: Colors.blueGrey)),
+              Text(DateFormat.yMEd().format(date), style: TextStyle(fontSize: 12 * curScaleFactor, color: Colors.blueGrey)),
             ],),
             IconButton(
              icon: Icon(Icons.delete),

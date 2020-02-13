@@ -13,12 +13,13 @@ class ChartBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+        final curScaleFactor = MediaQuery.of(context).textScaleFactor;
     return Column(
       children: <Widget>[
         Container(
           height: 20,
           child:FittedBox(
-          child: Text('\£${spendingAmount.toStringAsFixed(0)}'),
+          child: Text('\£${spendingAmount.toStringAsFixed(0)}', style: TextStyle(fontSize: 18 * curScaleFactor,)),
           ), 
         ),
         SizedBox(
@@ -51,7 +52,7 @@ class ChartBar extends StatelessWidget {
         SizedBox(
           height: 4,
         ),
-        Text(label),
+        Text(label,  style: TextStyle(fontSize: 16 * curScaleFactor,)),
       ],
     );
   }
