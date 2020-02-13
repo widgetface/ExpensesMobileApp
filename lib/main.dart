@@ -110,6 +110,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       );
+
+      var appBarStatusBarHeight = appBar.preferredSize.height + MediaQuery.of(context).padding.top;
     return Scaffold(
       appBar: appBar,
       body: SingleChildScrollView(
@@ -118,12 +120,12 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
-              height: (MediaQuery.of(context).size.height - appBar.preferredSize.height) * 0.25,
+              height: (MediaQuery.of(context).size.height - appBarStatusBarHeight) * 0.25,
               width: double.infinity,
               child: TransactionChart(_recentTransactions),
             ),
             Container( 
-              height: (MediaQuery.of(context).size.height - appBar.preferredSize.height)  * 0.75,
+              height: (MediaQuery.of(context).size.height - appBarStatusBarHeight)  * 0.75,
               child:   TransactionList(_userTransactions, _deleteTransaction),
             ),
           ],
