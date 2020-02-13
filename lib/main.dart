@@ -108,7 +108,16 @@ class _MyHomePageState extends State<MyHomePage> {
     
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
     
-    final appBar = AppBar(
+    final PreferredSizeWidget appBar = Platform.isIOS ?
+    CupertinoNavigationBar(
+            leading: Text('Expenses Application'),
+            trailing: IconButton(
+                icon: Icon(Icons.add),
+                onPressed: () => _startAddNewTransaction(context),
+            ),
+    )
+          :
+    AppBar(
         title: Text('Expenses Application'),
         actions: <Widget>[
           IconButton(
@@ -170,18 +179,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Platform.isIOS ?
         CupertinoPageScaffold(
-          navigationBar: CupertinoNavigationBar(
-            leading: Text('Expenses Application'),
-            trailing: IconButton(
-                icon: Icon(Icons.add),
-                onPressed: () => _startAddNewTransaction(context),
-            ),
-          ),
+          navigationBar:appBar,
           child: view,)
           :
         Scaffold(
           appBar: appBar,
-          body: view
+          body: view,
         );
   }
 }
