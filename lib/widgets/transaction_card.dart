@@ -24,17 +24,17 @@ class TransactionCard extends StatelessWidget {
     return Card(
         child: Row(children: <Widget>[
           Container(
-            margin: EdgeInsets.symmetric(
+            margin: const EdgeInsets.symmetric(
               horizontal:15,
               vertical: 20
               ),
-            padding: EdgeInsets.all(2),
+            padding: const EdgeInsets.all(2),
             height: 70,
             width: 70,
             child:CircleAvatar(
                 radius: 60,
                 child: Padding(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: FittedBox(
                 child: Text('£ ${amount.toStringAsFixed(2)}',style: TextStyle(fontSize: 18 * curScaleFactor, fontWeight: FontWeight.bold))),
               ),
@@ -44,7 +44,7 @@ class TransactionCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
-                margin: EdgeInsets.symmetric(
+                margin: const EdgeInsets.symmetric(
                 horizontal:2,
                 vertical: 10,
               ),
@@ -55,7 +55,7 @@ class TransactionCard extends StatelessWidget {
               Text(DateFormat.yMEd().format(date), style: TextStyle(fontSize: 12 * curScaleFactor, color: Colors.blueGrey)),
             ],),
             IconButton(
-             icon: Icon(Icons.delete),
+             icon: const Icon(Icons.delete),
              onPressed: (){deleteItem(id);},
             ),
         ],)

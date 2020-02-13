@@ -20,7 +20,7 @@ class TransactionList extends StatelessWidget {
           ),
           Container(
             height: 200,
-            margin: EdgeInsets.symmetric(
+            margin: const EdgeInsets.symmetric(
               vertical: 10,
               horizontal: 5,
             ),
