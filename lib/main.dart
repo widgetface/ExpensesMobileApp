@@ -1,4 +1,5 @@
-import 'dart:io'
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import './widgets/new_transaction.dart';
@@ -123,9 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
    var appBarStatusBarHeight = appBar.preferredSize.height + mediaQuery.padding.top;
     
-    return Scaffold(
-      appBar: appBar,
-      body: SingleChildScrollView(
+    var view = SingleChildScrollView(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -162,19 +161,16 @@ class _MyHomePageState extends State<MyHomePage> {
             txListWidget
           ],
         ),
-      ),
-      floatingActionButtonLocation: isLandscape ? 
-      FloatingActionButtonLocation.endFloat
-      :
-      FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Platform.isIOS ?
-      Container()
-      :
-      FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => _startAddNewTransaction(context),
-      ),
-    );
+      );
+
+    return Platform.isIOS ?
+        CupertinoPageScaffold(
+          child: view,)
+          :
+        Scaffold(
+          appBar: appBar,
+          body: view
+        );
   }
 }
 
