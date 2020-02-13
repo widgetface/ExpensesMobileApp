@@ -28,18 +28,18 @@ class TransactionList extends StatelessWidget {
           ),
         ],)
         :
-        ListView.builder(
-        itemBuilder: (ctx, index) {
-          return TransactionCard(
-              id: transactions[index].id,
-              title: transactions[index].title,
-              amount: transactions[index].amount,
-              date: transactions[index].date,
-              deleteItem: deleteTransaction,
-          );
-        },
-        itemCount: transactions.length,
-      )
+         ListView(
+            children: transactions
+                .map((tx) => TransactionCard(
+                      key: ValueKey(tx.id),
+                      id: tx.id,
+                      title: tx.title,
+                      amount: tx.amount,
+                      date: tx.date,
+                      deleteItem: deleteTransaction,
+                    ))
+                .toList(),
+          )
     );
   }
 }
