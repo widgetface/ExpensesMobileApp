@@ -105,7 +105,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
+    
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
+    
     final appBar = AppBar(
         title: Text('Expenses Application'),
         actions: <Widget>[
@@ -124,7 +126,8 @@ class _MyHomePageState extends State<MyHomePage> {
           0.7,
       child: TransactionList(_userTransactions, _deleteTransaction),
     );
-   var appBarStatusBarHeight = appBar.preferredSize.height + mediaQuery.padding.top;
+
+    var appBarStatusBarHeight = appBar.preferredSize.height + mediaQuery.padding.top;
     
     var view = SingleChildScrollView(
         child: Column(
@@ -167,7 +170,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Platform.isIOS ?
         CupertinoPageScaffold(
-          navigationBar: CupertinoNavigationBar(),
+          navigationBar: CupertinoNavigationBar(
+            leading: Text('Expenses Application'),
+            trailing: IconButton(
+                icon: Icon(Icons.add),
+                onPressed: () => _startAddNewTransaction(context),
+            ),
+          ),
           child: view,)
           :
         Scaffold(
