@@ -119,10 +119,10 @@ Widget _buildLanscapeContent(){
       );
 }
 
-Widget _buildPortraitConteht(mediaQuery, appBarStatusBarHeight){
+Widget _buildPortraitConteht(double totalHeight, double appBarStatusBarHeight){
 
 return (Container( 
-          height: (mediaQuery.size.height - appBarStatusBarHeight)  * 0.25,
+          height: (totalHeight - appBarStatusBarHeight)  * 0.25,
           child: TransactionChart(_recentTransactions),
         )
       );
@@ -200,7 +200,7 @@ return (Container(
               if (isLandscape)
                  _buildLanscapeContent(),
               if (!isLandscape) 
-                 _buildPortraitConteht(mediaQuery, appBarStatusBarHeight),
+                 _buildPortraitConteht(mediaQuery.size.height, appBarStatusBarHeight),
                   txListWidget,
               if (isLandscape) 
               _showChart ?
