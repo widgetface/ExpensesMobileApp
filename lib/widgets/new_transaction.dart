@@ -2,6 +2,9 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import '../widgets/adaptive_flat_button.dart';
+
 class NewTransaction extends StatefulWidget {
   final Function addTx;
 
@@ -33,20 +36,20 @@ class _NewTransactionState extends State<NewTransaction> {
     Navigator.of(context).pop();
   }
 
-  void _showDatePicker() {
-      showDatePicker(
-      context: context, 
-      initialDate: DateTime.now() , 
-      firstDate: DateTime(DateTime.now().year),
-      lastDate: DateTime.now()
-      ).then((selectedDate) {
-          if(selectedDate == null) return;
-          setState((){
-          _selectedDate = selectedDate;
-          });
+ void _presentDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2019),
+      lastDate: DateTime.now(),
+    ).then((pickedDate) {
+      if (pickedDate == null) {
+        return;
+      }
+      setState(() {
+        _selectedDate = pickedDate;
       });
-
-
+    });
   }
 
   @override
@@ -78,47 +81,31 @@ class _NewTransactionState extends State<NewTransaction> {
               onSubmitted: (_) => _submitData(),
               // onChanged: (val) => amountInput = val,
             ),
-            Container(
-              height: 50,
-              margin:EdgeInsets.symmetric(
-                vertical: 10, 
-                horizontal: 2
-                ),
-              child:  Row(
-              children: <Widget>[
-                Expanded(
-                  child:  Text(_selectedDate == null ? 
-                        'No Date Chosen'
-                        :
-                        DateFormat.yMEd().add_jms().format(_selectedDate)
+              Container(
+                height: 70,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        _selectedDate == null
+                            ? 'No Date Chosen!'
+                            : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
                       ),
                     ),
-                  FlatButton(
-                  autofocus: true,
-                  child: Text('Choose date'),
-                  textColor: Theme.of(context).primaryColor,
-                  onPressed: _showDatePicker,
-                  ),
-                ],
+                    AdaptiveFlatButton('Choose Date', _presentDatePicker)
+                  ],
+                ),
               ),
-            ),
-           Platform.isIOS ?
-           CupertinoButton(
-              child: Text('Add Transaction'),
-              color: Theme.of(context).primaryColor,
-              onPressed: _submitData,
-           )
-           :
-            FlatButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(6.0),
-                    side: BorderSide(color: Theme.of(context).primaryColor)
-                  ),
-              child: Text('Add Transaction'),
-              textColor: Colors.white,
-              color: Theme.of(context).primaryColor,
-              onPressed: _submitData,
-            ),
+              FlatButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(6.0),
+                      side: BorderSide(color: Theme.of(context).primaryColor)
+                    ),
+                child: Text('Add Transaction'),
+                textColor: Colors.white,
+                color: Theme.of(context).primaryColor,
+                onPressed: _submitData,
+              ),
           ],
         ),
       ),
