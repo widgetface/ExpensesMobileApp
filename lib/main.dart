@@ -100,8 +100,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+
+    final appBar =  AppBar(
         title: Text('Expenses Application'),
         actions: <Widget>[
           IconButton(
@@ -109,18 +109,23 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () => _startAddNewTransaction(context),
           ),
         ],
-      ),
+      );
+    return Scaffold(
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
-              height: MediaQuery.of(context).size.height * 0.25,
+              height: (MediaQuery.of(context).size.height - appBar.preferredSize.height) * 0.25,
               width: double.infinity,
               child: TransactionChart(_recentTransactions),
             ),
-            TransactionList(_userTransactions, _deleteTransaction),
+            Container( 
+              height: (MediaQuery.of(context).size.height - appBar.preferredSize.height)  * 0.75,
+              child:   TransactionList(_userTransactions, _deleteTransaction),
+            ),
           ],
         ),
       ),
